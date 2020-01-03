@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export function authenticate(username, password, route) {
+ function authenticate(username, password, route, type, board) {
   return axios.post('/'+route, {
     username,
-    password
+    password,
+    type,
+    board
   });
 }
 
-export function ping() {
-
-}
+export default authenticate
 

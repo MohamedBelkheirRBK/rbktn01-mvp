@@ -106,26 +106,6 @@ function gameRequestHandler(req, res) {
   }
 }
 
-// function gameRequestHandler(req, res) {
-//   var response = new Response();
-//   if(activeGames[req.user]===undefined) {
-//     addToQueue(req.user);
-//     response.status = "wait";
-//     var game = matching(req.user);
-//     if(game) {
-//       response.status = "go";
-//       response.game = game;
-//     }
-//     res.send(response);
-//     return ;
-//   } else {
-//     response.status = "ongoing"
-//     response.game = activeGames[req.user]
-//     if(handleTurn(req.user, req.body.board))
-//       response.status = "go"
-//     res.send(response)
-//   }
 
-// }
 
 module.exports = gameRequestHandler;

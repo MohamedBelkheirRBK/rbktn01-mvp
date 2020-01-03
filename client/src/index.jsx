@@ -13,7 +13,7 @@ function App() {
     case "login":
       return <Login next={()=>{setView("matching")}}/>
     case "matching":
-      return <Matching />
+      return <Matching next={()=>{setView("match")}} />
     case "match":
       return <Match />
     default:

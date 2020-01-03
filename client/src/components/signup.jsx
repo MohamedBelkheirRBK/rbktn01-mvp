@@ -12,6 +12,7 @@ function Signup(props) {
       </div>
       <div className="form">
         <Form name="signup" next={props.next}/>
+        <button className="btn"  onClick = {props.next}>Log In Instead</button>
       </div>
     </div>
   )
