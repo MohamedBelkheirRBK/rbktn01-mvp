@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import auth from "../requests.js";
 
 function Match(props) {
-
+  console.log("rerendered")
   const [board, setBoard] = useState([]);
   const [player, setPlayer] = useState(0);
   const [turn, setTurn] = useState()
+  const [myTurn, setMyTurn] = useState(true)
 
   function buildBoard() {
    return board.map((section, row)=>{
@@ -34,6 +35,7 @@ function Match(props) {
         if(response.data.status === "played")
         console.log(response.data.game.board)
         setBoard(response.data.game.board)
+        setMyTurn(true)
       })
     }
   }
@@ -41,12 +43,17 @@ function Match(props) {
   function ping() {
     auth(null, null, "game", "ping")
     .then(response=>{
-      if(response.data.status == "go"){
+      if(response.data.status === "wait"){
+        props.goBack();
+      }
+      if(response.data.status == "go" && myTurn){
+      console.log(response)
       setPlayer(response.data.game.turn === response.data.game.player1? 1: 2);
       setBoard(response.data.game.board)
       setTurn(response.data.turn)
+      setMyTurn(false)
       } else {
-        setTimeout(ping, 5000)
+        setTimeout(ping, 1000)
       }
     })
   }

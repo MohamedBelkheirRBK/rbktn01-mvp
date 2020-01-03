@@ -39,12 +39,48 @@ function handleTurn(player, board) {
   else
     game.turn = game.player1
 
-  if (game.isOver){
+  if (checkForWin(game.board)){
     delete activeGames[game.player1]
     delete activeGames[game.player2]
   }
   return true;
 }
+
+function checkForWin(board) {
+  function checker(row, col) {
+    counter = {
+      colC: 0,
+      rowC: 0,
+      minC: 0,
+      majC: 0
+    };
+    for(var i = 0; i<board.length; i++) {
+      if(board[i][col]){
+        counter.colC++;
+      }
+      if(board[row][i]){
+        counter.rowC++;
+      }
+      if(board[i][i]){
+        counter.majC++;
+      }
+      if(board[i][board.length-i-1]){
+        counter.minC++;
+      }
+    }
+    for(var i in counter){
+      if(counter[i]>2)
+        return true
+    }
+  }
+
+  for(var i=0; i<board.length; i++){
+    if(checker(i,i))
+      return true
+  }
+  return false;
+}
+
 
 function matching(user) {
   var opponent = "";

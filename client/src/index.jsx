@@ -7,7 +7,7 @@ import Matching from "./components/matching.jsx"
 import Match from "./components/match.jsx"
 
 function App() {
-  const [view, setView] = useState("signup")
+  const [view, setView] = useState("login")
 
   switch(view) {
     case "login":
@@ -15,7 +15,7 @@ function App() {
     case "matching":
       return <Matching next={()=>{setView("match")}} />
     case "match":
-      return <Match />
+      return <Match goBack = {()=>{setView("matching")}}/>
     default:
       return <Signup next={()=>{setView("login")}}/>
   }
