@@ -23,8 +23,21 @@ function createGame(player1, player2) {
 
 }
 
-function handleTurn() {
+function handleTurn(player, board) {
+  var game = activeGames[player];
+  if (game.turn !== player){
+    return ;
+  }
+  game.board = board;
+  if (game.turn == game.player1)
+    game.turn = game.player2
+  else
+    game.turn = game.player1
 
+  if (game.isOver){
+    delete activeGames[game.player1]
+    delete activeGames[game.player2]
+  }
 }
 
 function matching(user) {
@@ -58,10 +71,8 @@ function gameRequestHandler(req, res) {
     matching(req.user)
     res.send("wait");
     return ;
-  } else if(activeGames[req.user].turn = req.user) {
-    //handle move logic
-    res.send(activeGames[req.user])
   } else {
+    handleTurn(req.user, req.body.board)
     res.send(activeGames[req.user])
   }
 
