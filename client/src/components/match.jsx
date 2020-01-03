@@ -31,6 +31,11 @@ function Match(props) {
       board[row][col] = player;
       auth(null, null, "game", "play", board)
       .then((response)=>{
+        if(response.data.status === "game over"){
+          alert(response.data.winner +" Won the Game")
+          props.goBack();
+
+        }
         console.log(response.data)
         if(response.data.status === "played")
         console.log(response.data.game.board)

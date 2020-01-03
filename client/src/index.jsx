@@ -15,7 +15,7 @@ function App() {
     case "matching":
       return <Matching next={()=>{setView("match")}} />
     case "match":
-      return <Match goBack = {()=>{setView("matching")}}/>
+      return <Match goBack = {()=>{setView("login")}}/>
     default:
       return <Signup next={()=>{setView("login")}}/>
   }

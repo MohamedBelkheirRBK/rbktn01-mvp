@@ -135,6 +135,10 @@ function gameRequestHandler(req, res) {
 
     if(handleTurn(user, req.body.board)){
       respo.status = "played"
+      if(checkForWin(req.body.board)){
+        respo.status = "game over";
+        respo.winner = req.body.turn;
+      }
     } else {
       respo.status = "not your turn"
     }
