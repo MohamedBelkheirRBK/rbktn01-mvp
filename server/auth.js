@@ -4,6 +4,7 @@ var SignedIn = {
 
 function authenticate(req, res, next) {
   var cookie = req.cookies.user;
+  req.user = cookie.username;
   if (SignedIn[cookie.username] !== cookie.password) {
     res.status(400)
     res.send("Not Logged In")

@@ -12,6 +12,6 @@ app.post('/signup', require("./signup.js"))
 app.post('/login', require("./login.js"))
 
 app.use(require('./auth.js').auth)
-
+app.post('/game', require('./game.js'))
 
 app.listen(8000)
