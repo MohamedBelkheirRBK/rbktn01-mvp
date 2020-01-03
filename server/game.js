@@ -29,6 +29,7 @@ function createGame(player1, player2) {
 
 function handleTurn(player, board) {
   var game = activeGames[player];
+  console.log(player, game.turn)
   if (game.turn !== player){
     return false;
   }
@@ -48,7 +49,6 @@ function handleTurn(player, board) {
 function matching(user) {
   var opponent = "";
   for(var player in queueOfPlayers) {
-    console.log(player)
     if(player !== user){
       opponent = player;
       break;
@@ -61,7 +61,6 @@ function matching(user) {
 }
 
 function addToQueue(user) {
-  console.log(user, "Has been added to the queue")
   queueOfPlayers[user] = true;
 }
 
@@ -73,7 +72,6 @@ function gameRequestHandler(req, res) {
   var respo = new Response("wait", null);
 
   if(req.body.type === "ping") {
-    console.log("got ping request")
     if(activeGames[user]===undefined) {
       addToQueue(user);
       var newGame = matching(user);
@@ -98,9 +96,12 @@ function gameRequestHandler(req, res) {
       res.send()
       return ;
     }
-    console.log("got move request")
-    handleTurn(user, req.body.board)
-    respo.status = "played"
+
+    if(handleTurn(user, req.body.board)){
+      respo.status = "played"
+    } else {
+      respo.status = "not your turn"
+    }
     respo.game = activeGames[user];
     res.send(respo)
   }
