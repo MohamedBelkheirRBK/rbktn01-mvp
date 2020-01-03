@@ -11,7 +11,7 @@ function App() {
 
   switch(view) {
     case "login":
-      return <Login />
+      return <Login next={()=>{setView("matching")}}/>
     case "matching":
       return <Matching />
     case "match":

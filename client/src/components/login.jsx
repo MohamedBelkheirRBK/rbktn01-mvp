@@ -7,7 +7,7 @@ function Login(props) {
 
   return (
     <div className="login-form">
-      <Form name="Login"></Form>
+      <Form name="Login" next={props.next}></Form>
     </div>
   )
 }
